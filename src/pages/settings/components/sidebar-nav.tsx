@@ -74,9 +74,13 @@ export default function SidebarNav({
             >
               <span className='mr-2'>{item.icon}</span>
               {item.title}
+              
             </Link>
           ))}
+             
         </nav>
+
+    
       </div>
     </>
   )

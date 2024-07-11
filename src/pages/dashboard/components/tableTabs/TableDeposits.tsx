@@ -18,64 +18,162 @@ const TableDeposits = () => {
     
 
     const columns = [
-        {
-          accessorKey: "sn",
-          header: "S/N",
+      {
+        accessorKey: 'sn',
+        header: () => <div className='text-[12px] text-white'>S/N</div>,
+      },
+      {
+        accessorKey: 'name',
+        header: () => (
+          <div className='flex items-center justify-center gap-3 text-[12px] text-white'>
+            <div>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='8'
+                height='8'
+                fill='currentColor'
+                className='bi bi-caret-up-fill fill-white'
+                viewBox='0 0 16 16'
+              >
+                <path d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z' />
+              </svg>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='8'
+                height='8'
+                fill='currentColor'
+                className='bi bi-caret-down-fill fill-white'
+                viewBox='0 0 16 16'
+              >
+                <path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z' />
+              </svg>
+            </div>
+            <span className='text-white'>Name</span>
+          </div>
+        ),
+      },
+      {
+        accessorKey: 'tr',
+        header: () => (
+          <div className='text-[12px] text-white'>Transaction Reference</div>
+        ),
+      },
+      {
+        accessorKey: 'type',
+        header: () => <div className='text-[12px] text-white'>Type</div>,
+      },
+      {
+        accessorKey: 'amount',
+        header: () => <div className='text-[12px] text-white'>Amount</div>,
+      },
+      {
+        accessorKey: 'date',
+        header: () => (
+          <div className='flex items-center justify-center gap-3 text-[12px] text-white'>
+            <div>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='8'
+                height='8'
+                fill='currentColor'
+                className='bi bi-caret-up-fill fill-white'
+                viewBox='0 0 16 16'
+              >
+                <path d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z' />
+              </svg>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='8'
+                height='8'
+                fill='currentColor'
+                className='bi bi-caret-down-fill fill-white'
+                viewBox='0 0 16 16'
+              >
+                <path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z' />
+              </svg>
+            </div>
+            <span className='text-white'>Date</span>
+          </div>
+        ),
+      },
+      {
+        accessorKey: 'status',
+        header: () => (
+          <div className='flex items-center justify-center gap-3 text-[12px] text-white'>
+            <div>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='8'
+                height='8'
+                fill='currentColor'
+                className='bi bi-caret-up-fill fill-white'
+                viewBox='0 0 16 16'
+              >
+                <path d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z' />
+              </svg>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='8'
+                height='8'
+                fill='currentColor'
+                className='bi bi-caret-down-fill fill-white'
+                viewBox='0 0 16 16'
+              >
+                <path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z' />
+              </svg>
+            </div>
+            <span className='text-white'>Status</span>
+          </div>
+        ),
+  
+        cell: ({ row }) => {
+          const status = row.original.status
+          let bgColor
+          if (status === 'Successful') bgColor = '#31D067'
+          else if (status === 'Failed') bgColor = '#EA523D'
+          else if (status === 'Pending') bgColor = '#FFA349'
+  
+          return (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                backgroundColor: bgColor,
+                padding: '0.1rem 0.5rem',
+                borderRadius: '5rem',
+                color: 'white',
+                fontSize: '10px',
+              }}
+            >
+              <span
+                style={{
+                  display: 'inline-block',
+                  width: '8px',
+                  height: '8px',
+                  backgroundColor: 'white',
+                  borderRadius: '50%',
+                  marginRight: '0.5rem',
+                }}
+              ></span>
+              {status}
+            </div>
+          )
         },
-        {
-          accessorKey: "name",
-          header: " Name",
+      },
+      {
+        accessorKey: 'action',
+        header: () => <div className='text-[12px] text-white'>Action</div>,
+        cell: ({ row }) => {
+          return (
+            <div className='flex items-center justify-center space-x-2'>
+              <button className='rounded bg-[#EC681C] px-3 py-1 text-[12px] text-white'>
+                View
+              </button>
+            </div>
+          )
         },
-        {
-          accessorKey: "tr",
-          header: "Transaction Reference",
-        },
-        {
-          accessorKey: "type",
-          header: "Type",
-        },
-        {
-          accessorKey: "amount",
-          header: "Amount",
-        },
-        {
-          accessorKey: "date",
-          header: "Date",
-          width: '15%',
-        },
-        {
-            accessorKey: "status",
-            header: "Status",
-            cell: ({ row }) => {
-                const status = row.original.status;
-                let bgColor;
-                if (status === 'Successful') bgColor = '#31D067';
-                else if (status === 'Failed') bgColor = '#EA523D';
-                else if (status === 'Pending') bgColor = '#FFA349';
-
-                return (
-                    <div style={{ display: 'flex', alignItems: 'center', backgroundColor: bgColor, padding: '0.1rem 0.5rem', borderRadius: '5rem', color: 'white', fontSize: '10px' }}>
-                        <span style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: 'white', borderRadius: '50%', marginRight: '0.5rem' }}></span>
-                        {status}
-                    </div>
-                );
-            }         
-        },
-        {
-          accessorKey: "action",
-          header: () => <div className="text-right">Action</div>,
-          cell: ({ row }) => {
-            return (
-                <div className="flex items-center justify-center space-x-2">
-                    <button className="bg-[#EC681C] text-white px-3 py-1 rounded text-[12px]">
-                        View
-                    </button>
-                </div>
-            );
-          },
-        },
-    ];
-
+      },
+    ]
     const rows: RowType[] = [
         {
             id: 1,
